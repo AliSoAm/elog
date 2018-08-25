@@ -1,6 +1,6 @@
 #include "elog/logger.hpp"
 
-#define IF_LOG_(instance, severity)     if (!elog::get<instance>().checkSeverity(severity)) {;} else
+#define IF_LOG_(instance, severity)     if (elog::get<instance>().checkSeverity(severity))
 #define IF_LOG(severity)                IF_LOG_(ELOG_DEFAULT_INSTANCE, severity)
 
 //////////////////////////////////////////////////////////////////////////
