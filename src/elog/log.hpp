@@ -2,7 +2,6 @@
 
 #define IF_LOG_(instance, severity)     if (elog::get<instance>().checkSeverity(severity))
 #define IF_LOG(severity)                IF_LOG_(ELOG_DEFAULT_INSTANCE, severity)
-
 //////////////////////////////////////////////////////////////////////////
 // Main logging macros
 
@@ -44,7 +43,7 @@
 //////////////////////////////////////////////////////////////////////////
 // Conditional logging macros
 
-#define LOG_IF_(instance, severity, condition)  if (!(condition)) {;} else LOG_(instance, severity)
+#define LOG_IF_(instance, severity, condition)  if (condition) do {LOG_(instance, severity)} while (0)
 #define LOG_IF(severity, condition)             LOG_IF_(ELOG_DEFAULT_INSTANCE, severity, condition)
 
 #define LOG_VERBOSE_IF(condition)               LOG_IF(elog::VERBOSE, condition)
@@ -77,4 +76,4 @@
 #define LOGW_IF_(instance, condition)           LOG_WARNING_IF_(instance, condition)
 #define LOGE_IF_(instance, condition)           LOG_ERROR_IF_(instance, condition)
 #define LOGF_IF_(instance, condition)           LOG_FATAL_IF_(instance, condition)
-#define LOGN_IF_(instance, condition) LOG_NONE_IF_(instance, condition)
+#define LOGN_IF_(instance, condition)           LOG_NONE_IF_(instance, condition)

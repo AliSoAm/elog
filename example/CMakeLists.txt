@@ -8,6 +8,8 @@ add_executable (elog
                 ../src/elog/logger.cpp
                 ../src/elog/formatters/formatter.cpp
                 ../src/elog/formatters/pattern_formatter.cpp
+                ../src/elog/formatters/simple_formatter.cpp
+                ../src/elog/formatters/colored_formatter.cpp
                 ../src/elog/appenders/appender.cpp
                 ../src/elog/appenders/console_appender.cpp)
 target_link_libraries (elog  ${CMAKE_THREAD_LIBS_INIT})

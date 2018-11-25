@@ -3,7 +3,7 @@
 
 namespace elog
 {
-  static const char* abbreviatedWeekdayName(const struct tm& t)
+  const char* PatternFormatter::abbreviatedWeekdayName(const struct tm& t)
   {
     switch (t.tm_wday)
     {
@@ -18,7 +18,7 @@ namespace elog
     return "";
   }
 
-  static const char* fullWeekdayName(const struct tm& t)
+  const char* PatternFormatter::fullWeekdayName(const struct tm& t)
   {
     switch (t.tm_wday)
     {
@@ -32,7 +32,7 @@ namespace elog
     }
     return "";
   }
-  static const char* abbreviatedMounthName(const struct tm& t)
+  const char* PatternFormatter::abbreviatedMounthName(const struct tm& t)
   {
     switch (t.tm_wday)
     {
@@ -52,7 +52,7 @@ namespace elog
     return "";
   }
 
-  static const char* fullMonthName(const struct tm& t)
+  const char* PatternFormatter::fullMonthName(const struct tm& t)
   {
     switch (t.tm_wday)
     {
@@ -72,24 +72,6 @@ namespace elog
     return "";
   }
 
-  static std::string severityColor(Severity s)
-  {
-    switch (s)
-    {
-      case FATAL:
-      case ERROR:
-        return " \033[31m";
-      case WARNING:
-        return " \033[33m";
-      case INFO:
-        return " \033[34m";
-      case DEBUG:
-        return " \033[32m";
-      case VERBOSE:
-        return " \033[35m";
-    }
-    return " \033[0m";
-  }
   std::string PatternFormatter::percentString(char c, const Record& record)
   {
     switch (c)
@@ -156,7 +138,6 @@ namespace elog
   {
     std::string line;
     bool percent = false;
-    struct tm time;
     for (char c: pattern_)
     {
       if (c == '%')

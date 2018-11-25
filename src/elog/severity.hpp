@@ -66,4 +66,23 @@ namespace elog
     }
     return NONE;
   }
+
+  inline const char* severityColor(Severity s)
+  {
+    switch (s)
+    {
+      case FATAL:
+      case ERROR:
+        return " \033[31m";
+      case WARNING:
+        return " \033[33m";
+      case INFO:
+        return " \033[34m";
+      case DEBUG:
+        return " \033[32m";
+      case VERBOSE:
+        return " \033[35m";
+    }
+    return " \033[0m";
+  }
 }
