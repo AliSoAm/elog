@@ -11,6 +11,7 @@ add_executable (elog
                 ../src/elog/formatters/simple_formatter.cpp
                 ../src/elog/formatters/colored_formatter.cpp
                 ../src/elog/appenders/appender.cpp
+                ../src/elog/appenders/raw_appender.cpp
                 ../src/elog/appenders/console_appender.cpp)
 target_link_libraries (elog  ${CMAKE_THREAD_LIBS_INIT})
 

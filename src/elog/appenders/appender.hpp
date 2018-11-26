@@ -2,27 +2,16 @@
 
 #include "elog/record.hpp"
 #include "elog/formatters/formatter.hpp"
-#include <string>
 
 namespace elog
 {
-  class Appender
+  class BaseAppender
   {
   public:
-    Appender(Formatter& formatter);
-    virtual ~Appender();
+    BaseAppender(Formatter& formatter);
+    virtual ~BaseAppender();
     virtual void append(const Record& record) = 0;
   protected:
     Formatter* formatter_;
-  };
-
-  class RawAppender: public Appender
-  {
-  public:
-    RawAppender(Formatter& formatter);
-    ~RawAppender();
-    void append(const Record& record) override;
-  protected:
-    virtual void write(const std::string&) = 0;
   };
 }

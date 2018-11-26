@@ -3,7 +3,7 @@ namespace elog
 {
 
   template <unsigned int instance>
-  void Logger::init(Severity maxSeverity, std::initializer_list<Appender*> appenders)
+  void Logger::init(Severity maxSeverity, std::initializer_list<BaseAppender*> appenders)
   {
     if (instances.count(instance) == 0)
       instances.emplace(instance, new Logger(maxSeverity, appenders));
@@ -16,7 +16,7 @@ namespace elog
   }
 
   template <unsigned int instance>
-  void init(Severity maxSeverity, std::initializer_list<Appender*> appenders)
+  void init(Severity maxSeverity, std::initializer_list<BaseAppender*> appenders)
   {
     Logger::init<instance>(maxSeverity, appenders);
   }

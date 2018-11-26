@@ -1,7 +1,6 @@
 #pragma once
 
-#include "elog/appenders/appender.hpp"
-#include "elog/formatters/formatter.hpp"
+#include "elog/appenders/raw_appender.hpp"
 
 namespace elog
 {

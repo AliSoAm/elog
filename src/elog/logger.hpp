@@ -16,13 +16,13 @@ namespace elog
   {
   public:
     template <unsigned int instance>
-    static void init(Severity maxSeverity = NONE, std::initializer_list<Appender*> appenders = {});
+    static void init(Severity maxSeverity = NONE, std::initializer_list<BaseAppender*> appenders = {});
     template <unsigned int  instance>
     static Logger& get();
 
     Severity maxSeverity() const;
     void maxSeverity(Severity severity);
-    Logger& addAppender(Appender* appender);
+    Logger& addAppender(BaseAppender* appender);
     virtual void write(const Record& record);
     Logger& operator+=(const Record& record);
     bool checkSeverity(Severity severity) const;
@@ -31,14 +31,14 @@ namespace elog
     static std::map<unsigned int, Logger*> instances;
 
     Severity maxSeverity_;
-    std::vector<Appender*> appenders_;
+    std::vector<BaseAppender*> appenders_;
 
-    Logger(Severity maxSeverity = NONE, std::initializer_list<Appender*> = {});
+    Logger(Severity maxSeverity = NONE, std::initializer_list<BaseAppender*> = {});
     Logger& operator=(const Logger&) = delete;
   };
 
   template <unsigned int instance = ELOG_DEFAULT_INSTANCE>
-  void init(Severity maxSeverity = NONE, std::initializer_list<Appender*> appenders = {});
+  void init(Severity maxSeverity = NONE, std::initializer_list<BaseAppender*> appenders = {});
   template <unsigned int instance = ELOG_DEFAULT_INSTANCE>
   Logger& get();
 }

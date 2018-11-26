@@ -3,11 +3,11 @@ namespace elog
 {
   std::map<unsigned int, Logger*> Logger::instances;
 
-  Logger::Logger(Severity maxSeverity, std::initializer_list<Appender*> appenders): maxSeverity_(maxSeverity), appenders_(appenders)
+  Logger::Logger(Severity maxSeverity, std::initializer_list<BaseAppender*> appenders): maxSeverity_(maxSeverity), appenders_(appenders)
   {
   }
 
-  Logger& Logger::addAppender(Appender* appender)
+  Logger& Logger::addAppender(BaseAppender* appender)
   {
     appenders_.push_back(appender);
     return *this;

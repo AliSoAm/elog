@@ -3,27 +3,11 @@
 
 namespace elog
 {
-
-  Appender::Appender(Formatter& formatter): formatter_(&formatter)
+  BaseAppender::BaseAppender(Formatter& formatter): formatter_(&formatter)
   {
   }
 
-  Appender::~Appender()
+  BaseAppender::~BaseAppender()
   {
   }
-
-  RawAppender::RawAppender(Formatter& formatter): Appender(formatter)
-  {
-  }
-
-  RawAppender::~RawAppender()
-  {
-  }
-
-  void RawAppender::append(const Record& record)
-  {
-    std::string line = (*formatter_)(record);
-    write(line);
-  }
-
 }
