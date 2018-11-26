@@ -1,6 +1,7 @@
 #pragma once
 
 #include "formatter.hpp"
+
 namespace elog
 {
   class PatternFormatter: public Formatter

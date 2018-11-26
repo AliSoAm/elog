@@ -1,6 +1,7 @@
 #include "elog/formatters/colored_formatter.hpp"
 #include "elog/severity.hpp"
 #include <iomanip>
+#include <sstream>
 
 namespace elog
 {

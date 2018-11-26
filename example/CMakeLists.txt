@@ -2,6 +2,7 @@ cmake_minimum_required (VERSION 3.3)
 project (Test)
 SET(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-g -std=c++11 -pthread")
 find_package (Threads)
+add_definitions(-DELOG_STATIC_RECORD -DELOG_RECORD_LEN=26)
 add_executable (elog
                 main.cpp
                 ../src/elog/record.cpp

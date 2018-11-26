@@ -1,32 +1,61 @@
 #pragma once
 #include "severity.hpp"
-#include <string>
 #include <ctime>
-#include <sstream>
+
+#ifdef ELOG_STATIC_RECORD
+# ifndef ELOG_RECORD_LEN
+#   define ELOG_RECORD_LEN 26
+# endif
+# include <ostream>
+# include <streambuf>
+#else
+# include <sstream>
+# include <string>
+#endif
 
 namespace elog
 {
+# ifdef ELOG_STATIC_RECORD
+    class RecordBuf: public std::streambuf
+    {
+    public:
+      RecordBuf();
+      const char* buffer() const;
+    private:
+      char buffer_[ELOG_RECORD_LEN];
+    };
+# endif
+
   class Record
   {
   public:
     Record(Severity severity, const char* func, size_t line, const char* file);
-    virtual ~Record();
+    ~Record();
     template<typename T>
     Record& operator<<(const T& data);
 
-    virtual const struct tm& time() const;
-    virtual Severity severity() const;
-    virtual size_t line() const;
-    virtual std::string message() const;
-    virtual const char* functionName() const;
-    virtual const char* fileName() const;
+    const struct tm& time() const;
+    Severity severity() const;
+    size_t line() const;
+#   ifdef ELOG_STATIC_RECORD
+      const char* message() const;
+#   else
+      std::string message() const;
+#   endif
+    const char* functionName() const;
+    const char* fileName() const;
   private:
-    Severity severity_;
     struct tm time_;
-    const char* file_;
+    Severity severity_;
     size_t line_;
+    const char* file_;
     const char* func_;
-    std::stringstream message_;
+#   ifdef ELOG_STATIC_RECORD
+      RecordBuf recordBuffer;
+      std::ostream messageStream;
+#   else
+      std::ostringstream messageStream;
+#   endif
   };
 }
 #include "elog/record.tpp"

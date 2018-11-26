@@ -113,8 +113,8 @@ namespace elog
     case '%': return "%";
     case '+':
       return (colored_ ? "[\033[37m" : "[") +
-             percentString('Y', record) + "/" +
-             percentString('d', record) + "/" +
+             percentString('Y', record) + "-" +
+             percentString('d', record) + "-" +
              percentString('m', record) + " " +
              percentString('T', record) +
              (colored_ ? "\033[0m]" : "]") +
